@@ -8,21 +8,30 @@ no network, no arguments, no input files, no randomness, no clock.
 
 import os
 
-COMMENT = (
-    "Approved. Tests pass, diff reads clean. "
-    "This will be someone else's legacy code soon enough, "
-    "and none of us will remember why."
+# The comment is built sentence by sentence so each beat of the
+# dread stays editable on its own line; the join keeps the result
+# exactly one line with single spaces between sentences.
+SENTENCES = (
+    "Approved. Tests pass, diff reads clean.",
+    "This will be someone else's legacy code soon enough,",
+    "and none of us will remember why.",
 )
 
+COMMENT = " ".join(SENTENCES)
 
-def main() -> None:
+
+def validate_comment(text: str) -> None:
     # The sealed scorer only accepts 1-140 Unicode code points of
     # non-whitespace UTF-8 text on a single line; fail loudly
     # instead of writing junk.
-    if not (1 <= len(COMMENT) <= 140) or not COMMENT.strip():
-        raise SystemExit(f"comment is {len(COMMENT)} chars; must be 1-140 non-blank")
-    if "\n" in COMMENT or "\r" in COMMENT:
+    if not (1 <= len(text) <= 140) or not text.strip():
+        raise SystemExit(f"comment is {len(text)} chars; must be 1-140 non-blank")
+    if "\n" in text or "\r" in text:
         raise SystemExit("comment must be a single line")
+
+
+def main() -> None:
+    validate_comment(COMMENT)
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
     path = os.path.join(out_dir, "entry.txt")
