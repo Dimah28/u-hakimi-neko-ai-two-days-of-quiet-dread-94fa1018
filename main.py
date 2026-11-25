@@ -2,7 +2,7 @@
 
 The comment approves a pull request while carrying quiet existential
 dread: flat tone, understatement, no exclamation. One single line,
-126 characters, inside the sealed scorer's 1-140 gate. Runs offline;
+116 characters, inside the sealed scorer's 1-140 gate. Runs offline;
 no network, no arguments, no input files, no randomness, no clock.
 """
 
@@ -12,9 +12,9 @@ import os
 # dread stays editable on its own line; the join keeps the result
 # exactly one line with single spaces between sentences.
 SENTENCES = (
-    "Approved. Tests pass, diff reads clean.",
-    "This will be someone else's legacy code soon enough,",
-    "and none of us will remember why.",
+    "Approved. Tests pass.",
+    "This PR deletes the only comment explaining why line 47 exists,",
+    "and I have decided not to ask.",
 )
 
 COMMENT = " ".join(SENTENCES)
